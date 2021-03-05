@@ -6,7 +6,9 @@ from PyQt5 import QtCore, QtWidgets
 from openpyxl import Workbook
 from openpyxl import load_workbook
 from openpyxl.utils import get_column_letter
-
+"""
+根据输入的值选取指定列中的值，进行筛选分类导出为单独的excel文件
+"""
 
 def reader_excel():
     m = QtWidgets.QFileDialog.getExistingDirectory(

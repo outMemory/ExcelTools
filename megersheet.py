@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
-import os
-import sys
-import time
 
-from PyQt5 import QtCore, QtWidgets
-from openpyxl import Workbook
-from openpyxl import load_workbook
 import openpyxl.workbook.workbook
 import openpyxl.worksheet.worksheet
+from openpyxl import Workbook
+from openpyxl import load_workbook
+
+"""
+将输入的excel中的多个子表合并到一个子表中，并默认新增一列用来存放子表的名称
+"""
 
 
 def sheet_meger(

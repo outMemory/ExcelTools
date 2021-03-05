@@ -1,14 +1,13 @@
 # -*- coding: utf-8 -*-
-import os
-import sys
-import time
 
-from PyQt5 import QtCore, QtWidgets
-from openpyxl import Workbook
-from openpyxl import load_workbook
-from openpyxl.utils import get_column_letter, get_column_interval
-import openpyxl.worksheet.worksheet
 from copy import copy
+
+import openpyxl.worksheet.worksheet
+from openpyxl import Workbook
+
+"""
+预期实现批量应用表格格式的功能，暂时未实现
+"""
 
 
 class excel_tools1:

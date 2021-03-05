@@ -7,6 +7,9 @@ from PyQt5 import QtCore, QtWidgets
 from openpyxl import Workbook
 from openpyxl import load_workbook
 
+"""
+将输入文件夹中的excel文件合并成一个excel
+"""
 
 
 class Ui_MainWindow(object):

@@ -6,6 +6,10 @@ import win32com.client as win32
 from PyQt5 import QtCore, QtWidgets
 from PyQt5.QtWidgets import QRadioButton, QButtonGroup
 
+"""
+实现xls和xlsx文件的相互转换，目前保存位置为原文件路径下
+"""
+
 
 def xls_2_xlsx(xlspath):
     try:
