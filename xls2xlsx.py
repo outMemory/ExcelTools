@@ -16,22 +16,26 @@ def xls_2_xlsx(xlspath):
         excel = win32.gencache.EnsureDispatch('Excel.Application')
         wb = excel.Workbooks.Open(xlspath)
         # FileFormat = 51 is for .xlsx extension
-        wb.SaveAs(xlspath + "x", FileFormat=51)
+        wb.SaveAs((xlspath + "x").replace('/', '\\'), FileFormat=51)
         wb.Close()  # FileFormat = 56 is for .xls extension
         excel.Application.Quit()
     except Exception as e:
         Ui_MainWindow.message = str(e)
+        pass
+    print(xlspath)
 
 
 def xlsx_2_xls(xlsxpath):
     try:
         excel = win32.gencache.EnsureDispatch('Excel.Application')
         wb = excel.Workbooks.Open(xlsxpath)
-        wb.SaveAs(xlsxpath[:-4] + 'xls', FileFormat=56)
+        wb.SaveAs((xlsxpath[:-4] + 'xls').replace('/', '\\'), FileFormat=56)
         wb.Close()
         excel.Application.Quit()
     except Exception as e:
         Ui_MainWindow.message = str(e)
+        pass
+    print(xlsxpath)
 
 
 class Ui_MainWindow(object):
@@ -83,28 +87,26 @@ class Ui_MainWindow(object):
 
         # 显示运行信息
         self.yxxx = QtWidgets.QLabel(self.centralwidget)
-        self.yxxx.setGeometry(QtCore.QRect(50, 340, 400, 400))
+        self.yxxx.setGeometry(QtCore.QRect(50, 340, 400, 100))
         self.yxxx.setStyleSheet("color:red;font-size:20px")
-        self.yxxx.setText("")
+        self.yxxx.setText("保存位置在原文件夹")
 
         ################button按钮点击事件回调函数################
         self.savepath.clicked.connect(self.save_Excel)
         self.openfile.clicked.connect(self.reader_excel)
         self.startrun.clicked.connect(self.start)
 
-    @staticmethod
-    def reader_excel():
+    def reader_excel(self):
         m = QtWidgets.QFileDialog.getExistingDirectory(
             None, "选取文件夹", "D:/test/待合并表格/")  # 起始路径
         Ui_MainWindow.filepath = m
-        print(m)
+        self.message_put(m)
 
-    @staticmethod
-    def save_Excel():
+    def save_Excel(self):
         m = QtWidgets.QFileDialog.getExistingDirectory(
             None, "选取文件夹", "D:/test/合并结果/")  # 起始路径
         Ui_MainWindow.path_save = m
-        print(m)
+        self.message_put(m)
 
     def start(self):
         try:
@@ -115,15 +117,14 @@ class Ui_MainWindow(object):
                     if file.endswith('.xls'):
                         xls_2_xlsx(self.filepath + '/' + file)
                     else:
-                        self.message_put('该文件不是指定格式的文件' + file)
+                        self.message += '该文件不是指定格式的文件' + file + '\n'
                 elif self.panduan == 2:
                     if file.endswith('.xlsx'):
                         xlsx_2_xls(self.filepath + '/' + file)
                     else:
-                        self.message_put('该文件不是指定格式的文件' + file)
+                        self.message += '该文件不是指定格式的文件' + file + '\n'
                 else:
                     self.message_put('未选择转换方式')
-                    pass
         except Exception as e:
             print(e)
             self.message = str(e)
